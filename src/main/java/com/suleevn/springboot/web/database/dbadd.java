@@ -20,9 +20,9 @@ public class dbadd
         {
 
             String myDriver = "com.mysql.cj.jdbc.Driver";
-            String myUrl = "jdbc:mysql://localhost:3307/clients";
+            String myUrl = "jdbc:mariadb://naz.cyvhp4egbnl9.us-east-1.rds.amazonaws.com:3306/asia";
             Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myUrl, "root", "");
+            Connection conn = DriverManager.getConnection(myUrl, "root", "12345678");
 
 
 

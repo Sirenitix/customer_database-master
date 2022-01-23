@@ -16,9 +16,9 @@ import static com.suleevn.springboot.web.service.TodoService.*;
 public class dbsorting {
 
     public static void main(String[] args) {
-        String jdbcUrl = "jdbc:mysql://localhost:3307/clients";
+        String jdbcUrl = "jdbc:mariadb://naz.cyvhp4egbnl9.us-east-1.rds.amazonaws.com:3306/asia";
         String username = "root";
-        String password = "";
+        String password = "12345678";
         String sql = null;
 
        if(Objects.equals(sortColumn, "fullName")) {

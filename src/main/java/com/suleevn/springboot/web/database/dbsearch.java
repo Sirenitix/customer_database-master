@@ -19,9 +19,9 @@ public class dbsearch {
     private  static  Logger logger = LoggerFactory.getLogger(dbsearch.class);
 
     public static void main(String[] args) {
-        String jdbcUrl = "jdbc:mysql://localhost:3307/clients";
+        String jdbcUrl = "jdbc:mariadb://naz.cyvhp4egbnl9.us-east-1.rds.amazonaws.com:3306/asia";
         String username = "root";
-        String password = "";
+        String password = "12345678";
         String sql = "select * from clients where lower(fullName) like ?";
 
 

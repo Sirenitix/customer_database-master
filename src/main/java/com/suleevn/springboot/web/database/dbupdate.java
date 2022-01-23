@@ -14,9 +14,9 @@ import static com.suleevn.springboot.web.controller.TodoController.*;
 public class dbupdate {
 
     public static void main(String[] args) {
-        String jdbcUrl = "jdbc:mysql://localhost:3307/clients";
+        String jdbcUrl = "jdbc:mariadb://naz.cyvhp4egbnl9.us-east-1.rds.amazonaws.com:3306/asia";
         String username = "root";
-        String password = "";
+        String password = "12345678";
         String setnamesql = "update clients set fullName=?, iin=?,  passport=?, cr_date=?,  disc=?, add_inf=?, address=?, phoneNumber=?, prop=?  where id=?";
 
         try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password);

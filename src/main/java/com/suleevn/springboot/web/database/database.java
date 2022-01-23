@@ -16,8 +16,8 @@ public class database {
     public static Statement statement = null;
     public static ResultSet resultSet = null;
 
-    public static String url = "jdbc:mariadb://localhost:3307/clients";
-    public static String user = "root", pass = "";
+    public static String url = "jdbc:mariadb://naz.cyvhp4egbnl9.us-east-1.rds.amazonaws.com:3306/asia";
+    public static String user = "root", pass = "12345678";
 
     public static Integer  iddb;
     public static String  fullNameDb;
