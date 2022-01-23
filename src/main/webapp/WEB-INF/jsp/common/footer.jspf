@@ -1,0 +1,71 @@
+<style>
+/*    body {*/
+/*    background: -webkit-linear-gradient(to right, #ff5f6d, #ffc371);*/
+/*    background: linear-gradient(to right, #ff5f6d, #ffc371);*/
+/*    min-height: 100vh;*/
+/*}*/
+
+    #footer {
+        position: fixed;
+        padding: 10px 10px 0px 10px;
+        bottom: 0;
+        width: 100%;
+        /* Height of the footer*/
+        height: 40px;
+        background: white;
+
+
+    }
+</style>
+
+<body class="d-flex flex-column">
+<!-- For demo purpose -->
+<div class="container-fluid flex-grow-1 flex-shrink-0">
+    <div class="px-lg-5">
+        <div class="row py-5">
+            <div class="col-lg-12 mx-auto text-white text-center">
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End -->
+
+
+<!-- Footer -->
+<footer class="bg-white">
+    <div class="container py-5">
+        <div class="row py-4">
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
+
+            </div>
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+
+            </div>
+            <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+
+            </div>
+            <div class="col-lg-4 col-md-6 mb-lg-0">
+
+                <div class="p-1 rounded border">
+                    <div class="input-group">
+                        <div class="input-group-append">
+                            <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyrights -->
+    <div class="bg-light py-4" id="footer">
+        <div class="container text-center">
+            <p class="text-muted mb-0 py-2">2022 - Unknown - <a href="">Privacy</a></p>
+        </div>
+    </div>
+</footer>
+<!-- End -->
+
+</body>
