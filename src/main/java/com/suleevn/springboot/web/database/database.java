@@ -4,22 +4,30 @@ import com.suleevn.springboot.web.controller.TodoController;
 import com.suleevn.springboot.web.model.Todo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 
+
 public class database {
     public static Connection connect = null;
-    public static Statement statement = null;
+    public static PreparedStatement statement = null;
+    public static Connection ct = null;
     public static ResultSet resultSet = null;
+    public static ResultSet rs = null;
 
-    public static String url = "jdbc:mariadb://naz.cyvhp4egbnl9.us-east-1.rds.amazonaws.com:3306/asia";
-    public static String user = "root", pass = "12345678";
+    public static String url = "jdbc:mysql://naz.cyvhp4egbnl9.us-east-1.rds.amazonaws.com:3306/clients";
+    public static String user = "admin", pass = "12345678";
 
     public static Integer  iddb;
+    public static Integer  iddbAll;
     public static String  fullNameDb;
     public static Integer iinDb;
     public static String  passportDb;
@@ -33,6 +41,7 @@ public class database {
     public static int countdb;
     public static int indf;
     public static List<Integer>  iddbl = new ArrayList<Integer>();
+    public static List<Integer>  iddblAll = new ArrayList<Integer>();
     public static List<Integer>  idCounter = new ArrayList<Integer>();
     public static List<String>  fullNameDbl = new ArrayList<String>();
     public static List<Integer>  iinDbl = new ArrayList<Integer>();
@@ -47,17 +56,32 @@ public class database {
     public static int size;
     public static Integer maxid;
     static Logger logger = LoggerFactory.getLogger(database.class);
+    static Authentication authentication ;
+    static UserDetails userDetails ;
+
 
 
     public static void main(String[] args) {
 
 
+
+
         try {
+            authentication = SecurityContextHolder.getContext().getAuthentication();
+            userDetails = (UserDetails) authentication.getPrincipal();
             Class.forName("org.mariadb.jdbc.Driver");
             connect = DriverManager.getConnection(url, user, pass);
-            statement = connect.createStatement();
-            resultSet = statement.executeQuery("select * from clients");
+            String query = "select * from clients c where c.user = ?";
+            statement = connect.prepareStatement(query,ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1, userDetails.getUsername());
+            resultSet = statement.executeQuery();
+
+            String queryEverything = "select c.id from clients c order by c.id";
+            ct = DriverManager.getConnection(url, user, pass);
+            Statement stat = ct.createStatement();
+            rs = stat.executeQuery(queryEverything);
             size = 0;
+
 
 
             while(resultSet.next()){
@@ -82,17 +106,23 @@ public class database {
                 phoneNumberDbl.add(phoneNumberDb);
                 propDb = resultSet.getString(10);
                 propDbl.add(propDb);
-                if(iddbl.size() == 0){
-                    countdb = 0;
-                }else{
-                    countdb = 1;
-                }
+            }
 
+            while(rs.next()){
+                iddbAll = rs.getInt(1);
+                iddblAll.add(iddbAll);
+            }
+
+            if(iddblAll.size() == 0){
+                countdb = 0;
+            }else{
+                countdb = 1;
             }
 
 
-            if(iddbl.size() != 0){
-                 maxid = Collections.max(iddbl);
+            if(iddblAll.size() != 0 && !iddblAll.contains(null)){
+                System.out.println(Arrays.toString(iddblAll.toArray()));
+                 maxid = Collections.max(iddblAll);
             }
                 else{
                 maxid = 1;
@@ -108,7 +138,7 @@ public class database {
             logger.info("empty?:" + countdb);
             logger.info("true checker:" + indf);
 
-            if (resultSet != null)
+            if (rs != null)
             {
                 resultSet.last();    // moves cursor to the last row
                 size = resultSet.getRow(); // get row id

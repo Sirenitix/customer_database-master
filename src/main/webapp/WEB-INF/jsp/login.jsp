@@ -1,3 +1,4 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -267,7 +268,7 @@
     }
 
 </style>
-<title>Asia Stroi</title>
+<title>Азия Строй</title>
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <!-- Tabs Titles -->
@@ -278,10 +279,10 @@
         </div>
 
         <!-- Login Form -->
-        <form method="POST" action="/login" class="form-signin">
-            <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
-            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
-            <input type="submit" class="fadeIn fourth" value="Log In">
+        <form method="POST" action="/" class="form-signin">
+            <input type="text" id="login" class="fadeIn second" name="username" placeholder="Логин">
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="Пароль">
+            <input type="submit" class="fadeIn fourth" value="Войти">
         </form>
 
         <!-- Remind Passowrd -->

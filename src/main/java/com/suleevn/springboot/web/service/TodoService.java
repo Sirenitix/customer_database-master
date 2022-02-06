@@ -5,8 +5,12 @@ import com.suleevn.springboot.web.database.dbdelete;
 import com.suleevn.springboot.web.database.dbsearch;
 import com.suleevn.springboot.web.database.dbsorting;
 import com.suleevn.springboot.web.model.Todo;
+import com.suleevn.springboot.web.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,14 +23,20 @@ import static com.suleevn.springboot.web.database.database.*;
 @Service
 public class TodoService {
     public static List<Todo> todos = new ArrayList<Todo>();
-    public int todoCount = indf;
+    public static List<User> users = new ArrayList<User>();
     public static int iddel;
     public static String fullNameKey;
     public static String sortColumn;
     static Logger logger = LoggerFactory.getLogger(TodoService.class);
+    Authentication authentication;
+    UserDetails userDetails;
+
+
 
 
     public void refresh(){
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        userDetails = (UserDetails) authentication.getPrincipal();
         iddbl = new ArrayList<Integer>();
         fullNameDbl = new ArrayList<String>();
         iinDbl = new ArrayList<Integer>();
@@ -38,12 +48,13 @@ public class TodoService {
         phoneNumberDbl = new ArrayList<Integer>();
         propDbl = new ArrayList<String>();
 
+
         database.main(null);
         logger.info("size in service:"+size+"/"+countdb);
         if(countdb != 0){
             for (int i = 0; i < size; i++) {
 
-                todos.add(new Todo(iddbl.get(i), "nurasyl", fullNameDbl.get(i), iinDbl.get(i), passportDbl.get(i), dateDbl.get(i), discDbl.get(i), addInfoDbl.get(i),  addressDbl.get(i), phoneNumberDbl.get(i), propDbl.get(i)));
+                todos.add(new Todo(iddbl.get(i),  userDetails.getUsername(), fullNameDbl.get(i), iinDbl.get(i), passportDbl.get(i), dateDbl.get(i), discDbl.get(i), addInfoDbl.get(i),  addressDbl.get(i), phoneNumberDbl.get(i), propDbl.get(i)));
                 logger.info("todosIns:" + iddbl);
             }
 
@@ -80,6 +91,10 @@ public class TodoService {
     public void addTodo(String name, String fullName, Integer iin, String passport, String date, String disc, String add_inf,
                         String address, Integer phoneNumber, String prop) {
         todos.add(new Todo(indf, name, fullName, iin, passport, date, disc, add_inf, address, phoneNumber, prop));
+    }
+
+    public void addUser(String login, String password, String passwordChecker, String role, String enabled) {
+        users.add(new User(login, password, passwordChecker, role, enabled));
     }
 
 

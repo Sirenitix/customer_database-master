@@ -5,12 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import static com.suleevn.springboot.web.controller.NewUserController.*;
 import static com.suleevn.springboot.web.controller.TodoController.*;
-import static com.suleevn.springboot.web.database.database.indf;
 
 
 
-public class dbadd
+public class dbAddUser
 {
 
 
@@ -27,22 +27,15 @@ public class dbadd
 
 
 
-            String query = " insert into clients (id, fullName, iin,  passport, cr_date, disc, add_inf, address, phoneNumber, prop, user)"
-                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = " insert into user (login, password, role, enabled)"
+                    + " values (?, ?, ?, ?)";
 
 
             PreparedStatement preparedStmt = conn.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            preparedStmt.setInt (1, indf );
-            preparedStmt.setString (2, fullNameAdd);
-            preparedStmt.setInt (3,  iinAdd);
-            preparedStmt.setString (4, passportAdd);
-            preparedStmt.setString   (5, dateAdd);
-            preparedStmt.setString   (6, discAdd);
-            preparedStmt.setString   (7, addInfoAdd);
-            preparedStmt.setString   (8, addressAdd);
-            preparedStmt.setInt   (9, phoneNumberAdd);
-            preparedStmt.setString   (10, propAdd);
-            preparedStmt.setString   (11, userAdd);
+            preparedStmt.setString (1, loginAdd );
+            preparedStmt.setString (2, "{noop}"+ passwordAdd);
+            preparedStmt.setString (3,  roleAdd);
+            preparedStmt.setString (4,  enabledAdd);
 
 
 

@@ -1,10 +1,7 @@
 package com.suleevn.springboot.web.database;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 import static com.suleevn.springboot.web.service.TodoService.iddel;
 
@@ -12,13 +9,13 @@ import static com.suleevn.springboot.web.service.TodoService.iddel;
 public class dbdelete {
 
     public static void main(String[] args) {
-        String jdbcUrl = "jdbc:mariadb://naz.cyvhp4egbnl9.us-east-1.rds.amazonaws.com:3306/asia";
-        String username = "root";
+        String jdbcUrl = "jdbc:mysql://naz.cyvhp4egbnl9.us-east-1.rds.amazonaws.com:3306/clients";
+        String username = "admin";
         String password = "12345678";
         String sql = "delete from clients where id=?";
 
         try (Connection conn = DriverManager.getConnection(jdbcUrl, username, password);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 
             stmt.setInt(1, iddel);
             stmt.executeUpdate();

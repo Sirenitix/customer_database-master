@@ -14,7 +14,7 @@ import java.util.List;
 public class LoginController {
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login() {
         return "login";
     }
